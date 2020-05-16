@@ -35,8 +35,8 @@ public class UserControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
                     .andExpect(jsonPath("$.firstName").isEmpty());
 
-            // mockMvc.perform(get("/users/")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
-            // .andExpect(jsonPath("$").isNotEmpty());
+            mockMvc.perform(get("/users/")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
+                    .andExpect(jsonPath("$").isNotEmpty());
 
         } catch (Exception e) {
             fail("Should not have exception: " + e.getLocalizedMessage());

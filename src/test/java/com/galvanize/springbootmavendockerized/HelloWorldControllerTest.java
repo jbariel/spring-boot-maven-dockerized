@@ -52,4 +52,24 @@ public class HelloWorldControllerTest {
             fail("Should not have exception: " + e.getLocalizedMessage());
         }
     }
+
+    @Test
+    public void getJsonHelloUserObjectTest() {
+        try {
+            mockMvc.perform(get("/hello/User")).andDo(print()).andExpect(status().isOk())
+                    .andExpect(jsonPath("$.value").value("Hello User!"));
+        } catch (Exception e) {
+            fail("Should not have exception: " + e.getLocalizedMessage());
+        }
+    }
+
+    @Test
+    public void getXmlHelloUserObjectTest() {
+        try {
+            mockMvc.perform(get("/hello/User").accept("application/xml")).andDo(print()).andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.xpath("//value").string(is("Hello User!")));
+        } catch (Exception e) {
+            fail("Should not have exception: " + e.getLocalizedMessage());
+        }
+    }
 }
